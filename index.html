@@ -127,32 +127,9 @@ section{padding:80px 0}
 .skill-tag{font-size:.82rem;padding:8px 18px;border-radius:100px;border:1px solid var(--border);color:var(--text-dim);background:var(--bg-soft);transition:all .3s;cursor:default}
 .skill-tag:hover{color:var(--accent);border-color:var(--accent-dim);background:var(--accent-bg);transform:translateY(-2px)}
 .soon-pill{font-size:1rem;color:var(--text-dim);border:1px solid var(--border);border-radius:100px;display:inline-block;padding:12px 32px;letter-spacing:.02em}
-.vk-bar{display:none}
-.vk-bar{display:none}
-.vk-notif{position:fixed;top:80px;right:24px;z-index:1000;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:14px 16px;min-width:200px;box-shadow:0 8px 32px rgba(0,0,0,.3);display:none}
-.vk-notif-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.vk-notif-title{font-size:.78rem;font-weight:500;color:var(--text-dim)}
-.vk-notif-close{background:none;border:none;color:var(--text-dimmer);cursor:pointer;font-size:.8rem;padding:2px 6px;border-radius:4px;line-height:1}
-.vk-notif-close:hover{color:var(--text);background:var(--accent-bg)}
-.vk-notif-item{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;text-decoration:none;transition:all .2s;margin-bottom:4px}
-.vk-notif-item:last-child{margin-bottom:0}
-.vk-notif-item:hover{background:var(--accent-bg)}
-.vk-notif-icon{width:22px;height:22px;border-radius:50%;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.vk-notif-icon svg{width:12px;height:12px;color:var(--accent)}
-.vk-notif-name{font-size:.78rem;color:var(--text);font-weight:500;flex:1}
-.vk-notif-badge{padding:3px 10px;border-radius:100px;background:#4A76A8;color:#fff;font-size:.62rem;font-weight:600;text-decoration:none;flex-shrink:0}
-
-@media(max-width:640px){
-  .vk-notif{display:none!important}
-  .vk-bar{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:1000;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;padding:6px 12px;backdrop-filter:blur(16px);box-shadow:0 4px 20px rgba(0,0,0,.3);display:flex;align-items:center;gap:2px}
-  .vk-bar-item{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:100px;text-decoration:none;transition:all .2s;white-space:nowrap}
-  .vk-bar-item:hover{background:var(--accent-bg)}
-  .vk-bar-icon{width:20px;height:20px;border-radius:50%;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .vk-bar-icon svg{width:11px;height:11px;color:var(--accent)}
-  .vk-bar-name{font-size:.72rem;color:var(--text);font-weight:500}
-  .vk-bar-close{background:none;border:none;color:var(--text-dimmer);cursor:pointer;font-size:.7rem;padding:4px 6px;border-radius:50%;line-height:1;margin-left:4px;flex-shrink:0}
-  .vk-bar-close:hover{color:var(--text);background:var(--accent-bg)}
-  body{padding-bottom:70px}
+.project-actions .vk-sub{background:#4A76A8;border-color:#4A76A8;color:#fff;gap:6px;box-shadow:0 0 24px rgba(74,118,168,.45)}
+.project-actions .vk-sub:hover{background:#3a6191;border-color:#3a6191;color:#fff;transform:translateY(-2px);box-shadow:0 0 32px rgba(74,118,168,.6)}
+.project-actions .vk-sub svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
 
 /* footer */
 footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--text-dimmer);font-size:.82rem;position:relative;z-index:1}
@@ -208,7 +185,6 @@ footer a{color:var(--accent-dim);text-decoration:none}
   footer{padding:20px 16px;font-size:.72rem}
   .soon-pill{font-size:.82rem;padding:8px 20px}
   .soon-wrap{padding:24px 16px!important}
-  body{padding-bottom:170px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
@@ -281,6 +257,43 @@ footer a{color:var(--accent-dim);text-decoration:none}
 
       <div class="reveal" style="margin-top:32px">
         <div class="project-block">
+          <div class="project-mockup quiz">
+            <div class="mockup-bar">
+              <div class="mockup-dot r"></div>
+              <div class="mockup-dot y"></div>
+              <div class="mockup-dot g"></div>
+              <div class="mockup-url" style="display:flex;align-items:center;padding:0 10px;font-size:.6rem;color:var(--text-dimmer);letter-spacing:.02em">ilya.space/quizkit</div>
+            </div>
+            <div class="mockup-body">
+              <div class="mock-glow"></div>
+              <div class="mock-content">
+                <div class="mc-icon">✎</div>
+                <div class="mc-label">QuizKit</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3>QuizKit</h3>
+            <p>Платформа для викторин и проверочных работ в классе. Простой интерфейс, live-результаты, никакой регистрации — открыл браузер и прошёл.</p>
+            <div class="project-tech"><span>JavaScript</span><span>HTML/CSS</span><span>Vite</span></div>
+            <div class="project-actions">
+              <a href="https://github.com/IlyaSigma111/quizkit" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                GitHub
+              </a>
+              <a href="https://ilyasigma111.github.io/quizkit/" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.66 0 3-4.03 3-9s-1.34-9-3-9m0 18c-1.66 0-3-4.03-3-9s1.34-9 3-9"/><path dM3 12h18"/></svg>
+                Лендинг
+              </a>
+              <a href="https://vk.ru/club240219050" target="_blank" class="vk-sub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg>
+                Подписаться
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-block">
           <div class="project-mockup vox">
             <div class="mockup-bar">
               <div class="mockup-dot r"></div>
@@ -313,46 +326,9 @@ footer a{color:var(--accent-dim);text-decoration:none}
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                 Скачать
               </a>
-              <a href="https://vk.ru/club240534088" target="_blank">
+              <a href="https://vk.ru/club240534088" target="_blank" class="vk-sub">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg>
-                VK
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-block">
-          <div class="project-mockup quiz">
-            <div class="mockup-bar">
-              <div class="mockup-dot r"></div>
-              <div class="mockup-dot y"></div>
-              <div class="mockup-dot g"></div>
-              <div class="mockup-url" style="display:flex;align-items:center;padding:0 10px;font-size:.6rem;color:var(--text-dimmer);letter-spacing:.02em">ilya.space/quizkit</div>
-            </div>
-            <div class="mockup-body">
-              <div class="mock-glow"></div>
-              <div class="mock-content">
-                <div class="mc-icon">✎</div>
-                <div class="mc-label">QuizKit</div>
-              </div>
-            </div>
-          </div>
-          <div class="project-info">
-            <h3>QuizKit</h3>
-            <p>Платформа для викторин и проверочных работ в классе. Простой интерфейс, live-результаты, никакой регистрации — открыл браузер и прошёл.</p>
-            <div class="project-tech"><span>JavaScript</span><span>HTML/CSS</span><span>Vite</span></div>
-            <div class="project-actions">
-              <a href="https://github.com/IlyaSigma111/quizkit" target="_blank">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                GitHub
-              </a>
-              <a href="https://vk.ru/club240219050" target="_blank">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg>
-                VK
-              </a>
-              <a href="https://ilyasigma111.github.io/quizkit/" target="_blank">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.66 0 3-4.03 3-9s-1.34-9-3-9m0 18c-1.66 0-3-4.03-3-9s1.34-9 3-9"/><path dM3 12h18"/></svg>
-                Лендинг
+                Подписаться
               </a>
             </div>
           </div>
@@ -398,47 +374,12 @@ footer a{color:var(--accent-dim);text-decoration:none}
 
 <footer><div class="container"><p>✧ 2026 · <a href="https://github.com/IlyaSigma111" target="_blank">ilya.space</a></p></div></footer>
 
-<div class="vk-notif" id="vkNotif">
-  <div class="vk-notif-header">
-    <span class="vk-notif-title">✧ подпишись</span>
-    <button class="vk-notif-close" id="vkNotifClose" aria-label="Закрыть">✕</button>
-  </div>
-  <a href="https://vk.ru/club240534088" target="_blank" class="vk-notif-item">
-    <span class="vk-notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg></span>
-    <span class="vk-notif-name">Vox Browser</span>
-    <span class="vk-notif-badge">Подписаться</span>
-  </a>
-  <a href="https://vk.ru/club240219050" target="_blank" class="vk-notif-item">
-    <span class="vk-notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg></span>
-    <span class="vk-notif-name">QuizKit</span>
-    <span class="vk-notif-badge">Подписаться</span>
-  </a>
-</div>
-
-<div class="vk-bar" id="vkBar">
-  <a href="https://vk.ru/club240534088" target="_blank" class="vk-bar-item">
-    <span class="vk-bar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg></span>
-    <span class="vk-bar-name">Vox</span>
-  </a>
-  <a href="https://vk.ru/club240219050" target="_blank" class="vk-bar-item">
-    <span class="vk-bar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg></span>
-    <span class="vk-bar-name">Quiz</span>
-  </a>
-  <button class="vk-bar-close" id="vkBarClose" aria-label="Закрыть">✕</button>
-</div>
-
 <script>
 const observer=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add("visible")})},{threshold:.1})
 document.querySelectorAll(".reveal").forEach(e=>observer.observe(e))
 const t=document.getElementById("themeToggle"),h=document.documentElement
 const s=localStorage.getItem("theme");if(s)h.setAttribute("data-theme",s)
 t.addEventListener("click",()=>{const e=h.getAttribute("data-theme"),n=e==="dark"?"light":"dark";h.setAttribute("data-theme",n),localStorage.setItem("theme",n)})
-const b=document.getElementById("vkBar"),d=document.getElementById("vkNotif"),h=document.getElementById("vkBarClose"),g=document.getElementById("vkNotifClose")
-const k="vk"
-if(localStorage.getItem(k)!="1"){if(b&&window.innerWidth<640)b.style.display="flex";if(d&&window.innerWidth>=640)d.style.display="block"}
-function closeVk(){if(b)b.style.display="none";if(d)d.style.display="none";localStorage.setItem(k,"1")}
-if(h)h.addEventListener("click",closeVk)
-if(g)g.addEventListener("click",closeVk)
 </script>
 </body>
 </html>
