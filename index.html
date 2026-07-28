@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ilya.space — браузеры, викторины, инструменты</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-family:"Inter","system-ui",sans-serif}
+body{min-height:100vh;overflow-x:hidden;line-height:1.6;transition:background .4s,color .4s}
+::selection{background:#da755b44;color:inherit}
+
+[data-theme="dark"]{--bg:#07070a;--bg-soft:#0d0d12;--text:#f0eee9;--text-dim:#f0eee988;--text-dimmer:#f0eee955;--border:#ffffff0a;--border-hover:#ffffff15;--card-bg:#0d0d12;--accent:#da755b;--accent-dim:#da755b99;--accent-bg:#da755b11;--glow:rgba(218,117,91,.15);--grain:.03;--mockup-bg:#0d0d12}
+[data-theme="light"]{--bg:#f8f6f3;--bg-soft:#f0ede8;--text:#1a1a1e;--text-dim:#1a1a1e88;--text-dimmer:#1a1a1e55;--border:#1a1a1e0a;--border-hover:#1a1a1e15;--card-bg:#ffffff;--accent:#da755b;--accent-dim:#da755b99;--accent-bg:#da755b0d;--glow:rgba(218,117,91,.1);--grain:.02;--mockup-bg:#f0ede8}
+
+body{background:var(--bg);color:var(--text)}
+
+/* ambient */
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse 80% 60% at 50% -10%, #da755b12 0%, transparent 70%),radial-gradient(ellipse 50% 40% at 80% 70%, #7c3aed08 0%, transparent 60%);}
+body::after{content:'';position:fixed;inset:0;z-index:-1;opacity:var(--grain);pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");}
+
+/* decorative circles — like Zen */
+.deco-circles{position:fixed;pointer-events:none;z-index:0}
+.deco-circles div{position:absolute;border-radius:50%;border:1px solid var(--border);opacity:.5}
+.deco-circles .c1{width:300px;height:300px;top:-80px;right:-60px;border-width:1px}
+.deco-circles .c2{width:500px;height:500px;top:-160px;right:-140px;border-width:2px;opacity:.3}
+.deco-circles .c3{width:700px;height:700px;top:-260px;right:-240px;border-width:3px;opacity:.15}
+.deco-circles .c4{width:200px;height:200px;bottom:10%;left:-40px;border-width:1px}
+.deco-circles .c5{width:400px;height:400px;bottom:5%;left:-100px;border-width:2px;opacity:.2}
+
+.container{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* nav */
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;max-width:1148px;margin:0 auto;position:relative;z-index:100}
+nav .logo{font-family:"Bricolage Grotesque","system-ui",sans-serif;font-size:1.2rem;font-weight:600;letter-spacing:-.02em;color:var(--text);text-decoration:none}
+nav .logo span{color:var(--accent)}
+.nav-right{display:flex;align-items:center;gap:24px}
+nav .nav-links{display:flex;gap:28px;list-style:none}
+nav .nav-links a{color:var(--text-dim);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .3s}
+nav .nav-links a:hover{color:var(--text)}
+.theme-toggle{background:none;border:none;cursor:pointer;padding:0;width:52px;height:28px;flex-shrink:0}
+.theme-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:100px}
+.toggle-track{position:relative;width:100%;height:100%;border-radius:100px;background:var(--bg-soft);border:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 7px;transition:border-color .3s}
+.toggle-track:hover{border-color:var(--accent-dim)}
+.toggle-knob{position:absolute;width:20px;height:20px;border-radius:50%;background:var(--accent);top:3px;left:3px;z-index:2;transition:transform .4s cubic-bezier(.34,1.56,.64,1),background .3s;box-shadow:0 1px 3px rgba(0,0,0,.25),0 0 8px var(--glow)}
+[data-theme="light"] .toggle-knob{transform:translateX(24px)}
+.toggle-icon{display:flex;z-index:1;color:var(--text-dimmer);transition:color .3s;line-height:1}
+.toggle-icon svg{display:block}
+[data-theme="dark"] .toggle-icon--sun{color:var(--text-dimmer)}
+[data-theme="dark"] .toggle-icon--moon{color:var(--accent)}
+[data-theme="light"] .toggle-icon--sun{color:var(--accent)}
+[data-theme="light"] .toggle-icon--moon{color:var(--text-dimmer)}
+
+/* hero */
+.hero{min-height:85vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 40px}
+.hero-label{display:inline-block;font-size:.73rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-dim);margin-bottom:20px;border:1px solid var(--border);padding:6px 16px;border-radius:100px;animation:fadeUp .8s .2s both}
+.hero h1{font-family:"Bricolage Grotesque","system-ui",sans-serif;font-size:clamp(3.8rem,13vw,8.5rem);font-weight:700;line-height:1.05;letter-spacing:-.04em;margin-bottom:16px;
+  background:linear-gradient(135deg,var(--text) 0%,var(--text) 35%,var(--accent) 65%,#c084fc 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:fadeUp .8s .3s both}
+.hero .sub{font-size:clamp(1.05rem,2vw,1.3rem);color:var(--text-dim);max-width:520px;margin:0 auto 36px;font-weight:400;line-height:1.7;animation:fadeUp .8s .5s both}
+.hero-socials{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .8s .7s both;justify-content:center}
+.hero-socials a{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:100px;border:1px solid var(--border);color:var(--text-dim);text-decoration:none;font-size:.82rem;font-weight:500;transition:all .25s;background:var(--card-bg)}
+.hero-socials a:hover{color:var(--accent);border-color:var(--accent-dim);background:var(--accent-bg);transform:translateY(-2px)}
+.hero-socials a svg{width:16px;height:16px;flex-shrink:0}
+
+/* about strip */
+.about-strip{display:flex;align-items:center;gap:32px;padding:40px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-top:20px}
+.about-avatar{width:72px;height:72px;border-radius:50%;flex-shrink:0;overflow:hidden;border:2px solid var(--accent-dim);transition:border-color .3s}
+.about-avatar img{width:100%;height:100%;object-fit:cover;object-position:21% center}
+.about-avatar:hover{border-color:var(--accent)}
+.about-quote{flex:1}
+.about-quote p{font-size:.95rem;font-style:italic;color:var(--text-dim);line-height:1.7}
+.about-quote p span{color:var(--accent);font-style:normal;font-weight:500}
+.about-stats{display:flex;gap:28px;flex-shrink:0}
+.about-stats .stat{text-align:center}
+.about-stats .stat-num{font-family:"Bricolage Grotesque","system-ui",sans-serif;font-size:1.6rem;font-weight:600;color:var(--accent);letter-spacing:-.02em}
+.about-stats .stat-label{font-size:.65rem;color:var(--text-dimmer);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+
+/* sections */
+section{padding:80px 0}
+.section-label{font-size:.7rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-dim);margin-bottom:12px}
+.section-title{font-family:"Bricolage Grotesque","system-ui",sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-.03em;line-height:1.2;margin-bottom:16px}
+.section-desc{color:var(--text-dim);max-width:560px;font-size:.95rem;line-height:1.8}
+
+/* project block with mockup */
+.project-block{display:flex;gap:40px;padding:48px 0;border-bottom:1px solid var(--border);align-items:center}
+.project-block:first-of-type{padding-top:0}
+.project-block:last-of-type{border-bottom:none}
+.project-mockup{width:380px;flex-shrink:0;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--mockup-bg);transition:all .4s;position:relative}
+.project-mockup:hover{transform:translateY(-4px);border-color:var(--accent-dim);box-shadow:0 12px 40px var(--glow)}
+.project-mockup .mockup-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--border)}
+.project-mockup .mockup-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;transition:opacity .3s}
+.project-mockup .mockup-dot.r{background:#ff5f56}
+.project-mockup .mockup-dot.y{background:#ffbd2e}
+.project-mockup .mockup-dot.g{background:#27c93f}
+.project-mockup .mockup-url{flex:1;height:22px;border-radius:6px;background:var(--bg-soft);border:1px solid var(--border);margin-left:4px}
+.project-mockup .mockup-body{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.project-mockup .mockup-body .mock-glow{position:absolute;width:200px;height:200px;border-radius:50%;filter:blur(60px);opacity:.15}
+.project-mockup .mockup-body .mock-content{position:relative;z-index:1;text-align:center}
+.project-mockup .mockup-body .mock-content .mc-icon{font-size:2rem;margin-bottom:6px}
+.project-mockup .mockup-body .mock-content .mc-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dimmer)}
+.project-mockup.vox .mockup-body .mock-glow{background:var(--accent)}
+.project-mockup.vox .mockup-body{background:linear-gradient(180deg,var(--bg-soft),transparent)}
+.project-mockup.quiz .mockup-body .mock-glow{background:#7c3aed}
+.project-mockup.quiz .mockup-body{background:linear-gradient(180deg,var(--bg-soft),transparent)}
+
+.project-info{flex:1}
+.project-info h3{font-family:"Bricolage Grotesque","system-ui",sans-serif;font-size:1.6rem;font-weight:600;letter-spacing:-.02em;margin-bottom:10px}
+.project-info p{font-size:.9rem;color:var(--text-dim);line-height:1.7;margin-bottom:16px}
+.project-tech{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.project-tech span{font-size:.7rem;padding:4px 14px;border-radius:100px;background:var(--accent-bg);color:var(--accent-dim);border:1px solid var(--border)}
+
+.project-actions{display:flex;flex-wrap:wrap;gap:8px}
+.project-actions a{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:10px;text-decoration:none;font-size:.82rem;font-weight:500;transition:all .25s;color:var(--text-dim);border:1px solid var(--border);background:var(--card-bg)}
+.project-actions a:hover{color:var(--accent);border-color:var(--accent-dim);background:var(--accent-bg);transform:translateY(-2px)}
+.project-actions a svg{width:16px;height:16px;flex-shrink:0}
+
+/* skills */
+.skills-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:40px;max-width:640px}
+.skill-tag{font-size:.82rem;padding:8px 18px;border-radius:100px;border:1px solid var(--border);color:var(--text-dim);background:var(--bg-soft);transition:all .3s;cursor:default}
+.skill-tag:hover{color:var(--accent);border-color:var(--accent-dim);background:var(--accent-bg);transform:translateY(-2px)}
+
+/* footer */
+footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--text-dimmer);font-size:.82rem;position:relative;z-index:1}
+footer a{color:var(--accent-dim);text-decoration:none}
+
+/* animations */
+@keyframes fadeUp{from{transform:translateY(24px);opacity:0;filter:blur(6px)}to{transform:translateY(0);opacity:1;filter:blur(0)}}
+.reveal{opacity:0;transform:translateY(30px);filter:blur(4px);transition:all .7s cubic-bezier(.25,.46,.45,.94)}
+.reveal.visible{opacity:1;transform:translateY(0);filter:blur(0)}
+
+@media(max-width:900px){
+  .project-block{flex-direction:column;align-items:stretch}
+  .project-mockup{width:100%}
+  .about-strip{flex-wrap:wrap;gap:20px}
+  .about-stats{gap:20px}
+}
+@media(max-width:640px){
+  .hero h1{font-size:clamp(2.8rem,16vw,4rem)}
+  nav .nav-links{display:none}
+  section{padding:48px 0}
+  .hero{min-height:70vh;padding:60px 20px 40px}
+  .about-strip{flex-direction:column;text-align:center}
+  .about-stats{width:100%;justify-content:center}
+  .project-actions{flex-direction:column}
+  .project-actions a{justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<div class="deco-circles">
+  <div class="c1"></div><div class="c2"></div><div class="c3"></div><div class="c4"></div><div class="c5"></div>
+</div>
+
+<nav>
+  <a href="#" class="logo"><span>✧</span> ilya.space</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#projects">проекты</a></li>
+      <li><a href="#skills">навыки</a></li>
+      <li><a href="https://github.com/IlyaSigma111" target="_blank">github</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">
+      <span class="toggle-track">
+        <span class="toggle-knob"></span>
+        <span class="toggle-icon toggle-icon--sun"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+        <span class="toggle-icon toggle-icon--moon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+      </span>
+    </button>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="hero-label">✧ портфолио</span>
+  <h1>ilya.space</h1>
+  <p class="sub">создаю браузеры, викторины&nbsp;и&nbsp;цифровые&nbsp;инструменты.<br>каждый проект — шаг к удобному вебу</p>
+  <div class="hero-socials">
+    <a href="https://github.com/IlyaSigma111" target="_blank" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg> GitHub</a>
+    <a href="https://vk.ru/ilyagulkov" target="_blank" aria-label="VK"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg> VK</a>
+  </div>
+
+  <div class="container about-strip reveal">
+    <div class="about-avatar">
+      <img src="photo.jpg" alt="Ilya">
+    </div>
+    <div class="about-quote">
+      <p>«не делаю «проекты для галочки».<br>каждая строчка кода — <span>инструмент, который кому-то нужен</span>»</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat">
+        <div class="stat-num">148</div>
+        <div class="stat-label">репозиториев</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">7</div>
+        <div class="stat-label">месяцев</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2</div>
+        <div class="stat-label">в избранных</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="projects">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">✦ проекты</div>
+        <h2 class="section-title">избранные работы</h2>
+        <p class="section-desc">два проекта, в которые вложено больше всего сил. каждый — самостоятельный продукт от идеи до релиза.</p>
+      </div>
+
+      <div class="reveal" style="margin-top:32px">
+        <div class="project-block">
+          <div class="project-mockup vox">
+            <div class="mockup-bar">
+              <div class="mockup-dot r"></div>
+              <div class="mockup-dot y"></div>
+              <div class="mockup-dot g"></div>
+              <div class="mockup-url" style="display:flex;align-items:center;padding:0 10px;font-size:.6rem;color:var(--text-dimmer);letter-spacing:.02em">ilya.space/vox</div>
+            </div>
+            <div class="mockup-body">
+              <div class="mock-glow"></div>
+              <div class="mock-content">
+                <div class="mc-icon">⌨</div>
+                <div class="mc-label">Vox Browser</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3>Vox Browser</h3>
+            <p>Клавиатурный браузер с Vim-навигацией, рабочими столами (Hyperland-style), Zen-режимом, 9 темами и 6 формами вкладок. Electron + React + Zustand, полная локализация.</p>
+            <div class="project-tech"><span>TypeScript</span><span>Electron</span><span>React</span><span>Zustand</span></div>
+            <div class="project-actions">
+              <a href="https://github.com/IlyaSigma111/vox-browser" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                GitHub
+              </a>
+              <a href="https://ilyasigma111.github.io/vox-browser/" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.66 0 3-4.03 3-9s-1.34-9-3-9m0 18c-1.66 0-3-4.03-3-9s1.34-9 3-9"/><path dM3 12h18"/></svg>
+                Лендинг
+              </a>
+              <a href="https://github.com/IlyaSigma111/vox-browser/releases/latest" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                Скачать
+              </a>
+              <a href="https://vk.ru/club240534088" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg>
+                VK
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-block">
+          <div class="project-mockup quiz">
+            <div class="mockup-bar">
+              <div class="mockup-dot r"></div>
+              <div class="mockup-dot y"></div>
+              <div class="mockup-dot g"></div>
+              <div class="mockup-url" style="display:flex;align-items:center;padding:0 10px;font-size:.6rem;color:var(--text-dimmer);letter-spacing:.02em">ilya.space/quizkit</div>
+            </div>
+            <div class="mockup-body">
+              <div class="mock-glow"></div>
+              <div class="mock-content">
+                <div class="mc-icon">✎</div>
+                <div class="mc-label">QuizKit</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3>QuizKit</h3>
+            <p>Платформа для викторин и проверочных работ в классе. Простой интерфейс, live-результаты, никакой регистрации — открыл браузер и прошёл.</p>
+            <div class="project-tech"><span>JavaScript</span><span>HTML/CSS</span><span>Vite</span></div>
+            <div class="project-actions">
+              <a href="https://github.com/IlyaSigma111/quizkit" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                GitHub
+              </a>
+              <a href="https://vk.ru/club240219050" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg>
+                VK
+              </a>
+              <a href="https://ilyasigma111.github.io/quizkit/" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.66 0 3-4.03 3-9s-1.34-9-3-9m0 18c-1.66 0-3-4.03-3-9s1.34-9 3-9"/><path dM3 12h18"/></svg>
+                Лендинг
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container" style="text-align:center;padding:60px 24px">
+    <p style="font-size:1rem;color:var(--text-dim);border:1px solid var(--border);border-radius:100px;display:inline-block;padding:12px 32px;letter-spacing:.02em">✦ скоро ещё проекты — добавляю по мере готовности</p>
+  </div>
+
+  <section id="skills">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">✦ навыки</div>
+        <h2 class="section-title">технологии и инструменты</h2>
+        <p class="section-desc">от браузерных движков до мобильной разработки — стек, который сложился за полгода плотной работы.</p>
+      </div>
+      <div class="skills-wrap reveal">
+        <span class="skill-tag">TypeScript</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Rust</span><span class="skill-tag">Kotlin</span>
+        <span class="skill-tag">Electron</span><span class="skill-tag">React</span><span class="skill-tag">Zustand</span><span class="skill-tag">Tauri</span>
+        <span class="skill-tag">Node.js</span><span class="skill-tag">Vite</span><span class="skill-tag">Android SDK</span><span class="skill-tag">HTML/CSS</span>
+        <span class="skill-tag">Git</span><span class="skill-tag">UI/UX</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container" style="text-align:center">
+      <div class="reveal">
+        <div class="section-label">✦ контакты</div>
+        <h2 class="section-title">остаёмся на связи</h2>
+        <p class="section-desc" style="margin:0 auto 32px">есть идея или предложение? пиши в любой мессенджер — открыт к диалогу</p>
+      </div>
+      <div class="hero-socials reveal" style="justify-content:center">
+        <a href="https://github.com/IlyaSigma111" target="_blank" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg> GitHub</a>
+        <a href="https://vk.ru/ilyagulkov" target="_blank" aria-label="VK"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg> VK</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="container"><p>✧ 2026 · <a href="https://github.com/IlyaSigma111" target="_blank">ilya.space</a></p></div></footer>
+
+<script>
+const observer=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add("visible")})},{threshold:.1})
+document.querySelectorAll(".reveal").forEach(e=>observer.observe(e))
+const t=document.getElementById("themeToggle"),h=document.documentElement
+const s=localStorage.getItem("theme");if(s)h.setAttribute("data-theme",s)
+t.addEventListener("click",()=>{const e=h.getAttribute("data-theme"),n=e==="dark"?"light":"dark";h.setAttribute("data-theme",n),localStorage.setItem("theme",n)})
+</script>
+</body>
+</html>
