@@ -17,7 +17,7 @@ body{min-height:100vh;overflow-x:hidden;line-height:1.6;transition:background .4
 [data-theme="dark"]{--bg:#07070a;--bg-soft:#0d0d12;--text:#f0eee9;--text-dim:#f0eee988;--text-dimmer:#f0eee955;--border:#ffffff0a;--border-hover:#ffffff15;--card-bg:#0d0d12;--accent:#da755b;--accent-dim:#da755b99;--accent-bg:#da755b11;--glow:rgba(218,117,91,.15);--grain:.03;--mockup-bg:#0d0d12}
 [data-theme="light"]{--bg:#f8f6f3;--bg-soft:#f0ede8;--text:#1a1a1e;--text-dim:#1a1a1e88;--text-dimmer:#1a1a1e55;--border:#1a1a1e0a;--border-hover:#1a1a1e15;--card-bg:#ffffff;--accent:#da755b;--accent-dim:#da755b99;--accent-bg:#da755b0d;--glow:rgba(218,117,91,.1);--grain:.02;--mockup-bg:#f0ede8}
 
-body{background:var(--bg);color:var(--text);padding-bottom:150px}
+body{background:var(--bg);color:var(--text)}
 
 /* ambient */
 body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
@@ -127,23 +127,32 @@ section{padding:80px 0}
 .skill-tag{font-size:.82rem;padding:8px 18px;border-radius:100px;border:1px solid var(--border);color:var(--text-dim);background:var(--bg-soft);transition:all .3s;cursor:default}
 .skill-tag:hover{color:var(--accent);border-color:var(--accent-dim);background:var(--accent-bg);transform:translateY(-2px)}
 .soon-pill{font-size:1rem;color:var(--text-dim);border:1px solid var(--border);border-radius:100px;display:inline-block;padding:12px 32px;letter-spacing:.02em}
+.vk-bar{display:none}
+.vk-bar{display:none}
+.vk-notif{position:fixed;top:80px;right:24px;z-index:1000;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:14px 16px;min-width:200px;box-shadow:0 8px 32px rgba(0,0,0,.3);display:none}
+.vk-notif-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.vk-notif-title{font-size:.78rem;font-weight:500;color:var(--text-dim)}
+.vk-notif-close{background:none;border:none;color:var(--text-dimmer);cursor:pointer;font-size:.8rem;padding:2px 6px;border-radius:4px;line-height:1}
+.vk-notif-close:hover{color:var(--text);background:var(--accent-bg)}
+.vk-notif-item{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;text-decoration:none;transition:all .2s;margin-bottom:4px}
+.vk-notif-item:last-child{margin-bottom:0}
+.vk-notif-item:hover{background:var(--accent-bg)}
+.vk-notif-icon{width:22px;height:22px;border-radius:50%;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.vk-notif-icon svg{width:12px;height:12px;color:var(--accent)}
+.vk-notif-name{font-size:.78rem;color:var(--text);font-weight:500;flex:1}
+.vk-notif-badge{padding:3px 10px;border-radius:100px;background:#4A76A8;color:#fff;font-size:.62rem;font-weight:600;text-decoration:none;flex-shrink:0}
 
-/* vk sticky bar */
-.vk-bar{position:fixed;bottom:0;left:0;right:0;z-index:1000;background:var(--bg-soft);border-top:1px solid var(--border);backdrop-filter:blur(16px);padding:12px 16px;display:none}
-.vk-bar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.vk-bar-title{font-size:.78rem;color:var(--text-dim);font-weight:500}
-.vk-bar-close{background:none;border:none;color:var(--text-dimmer);cursor:pointer;font-size:.85rem;padding:2px 6px;border-radius:4px;line-height:1}
-.vk-bar-close:hover{color:var(--text);background:var(--accent-bg)}
-.vk-bar-items{display:flex;flex-direction:column;gap:8px}
-.vk-bar-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;background:var(--card-bg);border:1px solid var(--border);text-decoration:none;transition:all .2s}
-.vk-bar-item:hover{border-color:var(--accent-dim);background:var(--accent-bg)}
-.vk-bar-icon{width:28px;height:28px;border-radius:50%;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.vk-bar-icon svg{width:14px;height:14px;color:var(--accent)}
-.vk-bar-info{flex:1;min-width:0}
-.vk-bar-name{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.3}
-.vk-bar-desc{font-size:.68rem;color:var(--text-dimmer);line-height:1.2}
-.vk-bar-btn{flex-shrink:0;padding:5px 14px;border-radius:100px;background:#4A76A8;color:#fff;font-size:.7rem;font-weight:600;text-decoration:none;transition:background .2s}
-.vk-bar-btn:hover{background:#3b6390}
+@media(max-width:640px){
+  .vk-notif{display:none!important}
+  .vk-bar{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:1000;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;padding:6px 12px;backdrop-filter:blur(16px);box-shadow:0 4px 20px rgba(0,0,0,.3);display:flex;align-items:center;gap:2px}
+  .vk-bar-item{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:100px;text-decoration:none;transition:all .2s;white-space:nowrap}
+  .vk-bar-item:hover{background:var(--accent-bg)}
+  .vk-bar-icon{width:20px;height:20px;border-radius:50%;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .vk-bar-icon svg{width:11px;height:11px;color:var(--accent)}
+  .vk-bar-name{font-size:.72rem;color:var(--text);font-weight:500}
+  .vk-bar-close{background:none;border:none;color:var(--text-dimmer);cursor:pointer;font-size:.7rem;padding:4px 6px;border-radius:50%;line-height:1;margin-left:4px;flex-shrink:0}
+  .vk-bar-close:hover{color:var(--text);background:var(--accent-bg)}
+  body{padding-bottom:70px}
 
 /* footer */
 footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--text-dimmer);font-size:.82rem;position:relative;z-index:1}
@@ -389,23 +398,33 @@ footer a{color:var(--accent-dim);text-decoration:none}
 
 <footer><div class="container"><p>✧ 2026 · <a href="https://github.com/IlyaSigma111" target="_blank">ilya.space</a></p></div></footer>
 
+<div class="vk-notif" id="vkNotif">
+  <div class="vk-notif-header">
+    <span class="vk-notif-title">✧ подпишись</span>
+    <button class="vk-notif-close" id="vkNotifClose" aria-label="Закрыть">✕</button>
+  </div>
+  <a href="https://vk.ru/club240534088" target="_blank" class="vk-notif-item">
+    <span class="vk-notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg></span>
+    <span class="vk-notif-name">Vox Browser</span>
+    <span class="vk-notif-badge">Подписаться</span>
+  </a>
+  <a href="https://vk.ru/club240219050" target="_blank" class="vk-notif-item">
+    <span class="vk-notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg></span>
+    <span class="vk-notif-name">QuizKit</span>
+    <span class="vk-notif-badge">Подписаться</span>
+  </a>
+</div>
+
 <div class="vk-bar" id="vkBar">
-  <div class="vk-bar-header">
-    <span class="vk-bar-title">✧ подпишись на&nbsp;паблики VK</span>
-    <button class="vk-bar-close" id="vkBarClose" aria-label="Закрыть">✕</button>
-  </div>
-  <div class="vk-bar-items">
-    <a href="https://vk.ru/club240534088" target="_blank" class="vk-bar-item">
-      <span class="vk-bar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg></span>
-      <span class="vk-bar-info"><span class="vk-bar-name">Vox Browser</span><span class="vk-bar-desc">клавиатурный браузер с Vim</span></span>
-      <span class="vk-bar-btn">Подписаться</span>
-    </a>
-    <a href="https://vk.ru/club240219050" target="_blank" class="vk-bar-item">
-      <span class="vk-bar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg></span>
-      <span class="vk-bar-info"><span class="vk-bar-name">QuizKit</span><span class="vk-bar-desc">платформа для викторин</span></span>
-      <span class="vk-bar-btn">Подписаться</span>
-    </a>
-  </div>
+  <a href="https://vk.ru/club240534088" target="_blank" class="vk-bar-item">
+    <span class="vk-bar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg></span>
+    <span class="vk-bar-name">Vox</span>
+  </a>
+  <a href="https://vk.ru/club240219050" target="_blank" class="vk-bar-item">
+    <span class="vk-bar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8c0-2.21 0-3.31.69-4 .69-.69 1.79-.69 4-.69h6.62c2.21 0 3.31 0 4 .69.69.69.69 1.79.69 4v8c0 2.21 0 3.31-.69 4-.69.69-1.79.69-4 .69H8.7c-2.21 0-3.31 0-4-.69C4 19.31 4 18.21 4 16z"/><path d="M13 17V7l5 5-5 5"/><path d="M6 12h7"/></svg></span>
+    <span class="vk-bar-name">Quiz</span>
+  </a>
+  <button class="vk-bar-close" id="vkBarClose" aria-label="Закрыть">✕</button>
 </div>
 
 <script>
@@ -414,8 +433,12 @@ document.querySelectorAll(".reveal").forEach(e=>observer.observe(e))
 const t=document.getElementById("themeToggle"),h=document.documentElement
 const s=localStorage.getItem("theme");if(s)h.setAttribute("data-theme",s)
 t.addEventListener("click",()=>{const e=h.getAttribute("data-theme"),n=e==="dark"?"light":"dark";h.setAttribute("data-theme",n),localStorage.setItem("theme",n)})
-const b=document.getElementById("vkBar"),c=document.getElementById("vkBarClose")
-if(b){if(localStorage.getItem("vk")!="1")b.style.display="block";c&&c.addEventListener("click",()=>{b.style.display="none";localStorage.setItem("vk","1")})}
+const b=document.getElementById("vkBar"),d=document.getElementById("vkNotif"),h=document.getElementById("vkBarClose"),g=document.getElementById("vkNotifClose")
+const k="vk"
+if(localStorage.getItem(k)!="1"){if(b&&window.innerWidth<640)b.style.display="flex";if(d&&window.innerWidth>=640)d.style.display="block"}
+function closeVk(){if(b)b.style.display="none";if(d)d.style.display="none";localStorage.setItem(k,"1")}
+if(h)h.addEventListener("click",closeVk)
+if(g)g.addEventListener("click",closeVk)
 </script>
 </body>
 </html>
